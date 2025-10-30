@@ -1,0 +1,75 @@
+﻿@model _2tallertecnico.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h2>Editar Usuario</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <input type="hidden" asp-for="IdUsuario" />
+            <input type="hidden" asp-for="Fecha_Registro" />
+
+            <div class="mb-3">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" value="@Model.IdUsuario" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsuarioNombre" class="form-label"></label>
+                <input asp-for="UsuarioNombre" class="form-control" />
+                <span asp-validation-for="UsuarioNombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Apellido" class="form-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-control" value="" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <small class="form-text text-muted">Dejar en blanco si no desea cambiar la contraseña</small>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="IdCargo" class="form-label">Cargo</label>
+                <select asp-for="IdCargo" class="form-select" asp-items="ViewBag.IdCargo"></select>
+                <span asp-validation-for="IdCargo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="Estado" type="checkbox" class="form-check-input" />
+                <label asp-for="Estado" class="form-check-label">Activo</label>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Guardar Cambios
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
